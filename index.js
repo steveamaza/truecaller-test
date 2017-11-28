@@ -9,6 +9,7 @@ const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
+const tc = require('./config/truecaller');
 
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -40,6 +41,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // process the login form
+/*
 app.post(
   '/login',
   passport.authenticate('local-login', {
@@ -48,9 +50,10 @@ app.post(
     failureFlash: true, // allow flash messages
   })
 );
+*/
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, tc); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

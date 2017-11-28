@@ -1,4 +1,4 @@
-<!-- views/index.ejs -->
+<!-- views/login.ejs -->
 <!doctype html>
 <html>
 
@@ -9,21 +9,33 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <!-- load fontawesome -->
     <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Poppins" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
 
         <div class="jumbotron text-center">
-            <a href="/"><img class="img-responsive" src="../img/truecaller-logo.png" alt="truecaller logo"></a>
+            <a href="/">
+                <img class="small-img img-responsive" src="../img/truecaller-logo.png" alt="truecaller logo">
+            </a>
+        </div>
 
-            <p>Login or Register with:</p>
-            <div class="sign-in-buttons"></div>
-                <a href="/login" class="btn btn-default">
-                    <span class="email"></span> Login With Email</a>
-                <a href="/signup" class="btn btn-default">
-                    <span class="email"></span> Signup With Email</a>
-            </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1 class="heading">Login/ SignUp</h1>
+
+                    <!-- LOGIN FORM -->
+                    <form action="/login" method="post">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" name="phone">
+                        </div>
+
+                        <button type="submit" class="btn btn-enter">Login</button>
+                    </form>
+
+                    <hr>
+
         </div>
 
     </div>
