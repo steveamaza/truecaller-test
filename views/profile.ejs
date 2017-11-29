@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container"> 
 
         <div class="jumbotron text-center">
             <a href="/">
@@ -34,7 +34,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 <script>
     var socket = io('https://still-basin-33822.herokuapp.com/');
-    socket.on('error', function (data) {
+
+    socket.on('connected', (data)=>{
+        console.log("connected: ", data);
+    });
+    socket.on('err', function (data) {
         console.log("error: ", data);
     });
     socket.on('profile', function(data){
