@@ -6,7 +6,6 @@ module.exports = function (app, tc, io) {
 
   // LOGIN SECTION =======================
   app.post('/login', (req, res) => {
-    console.log(req.body);
     tc.call_truecaller(req.body.phone, (err, body) => {
       if (err) return console.log('err: ', err);
       const validRequest = JSON.parse(body);
@@ -30,7 +29,6 @@ module.exports = function (app, tc, io) {
 
   //
   app.post('/auth/truecaller/callback', (req, res) => {
-    console.log(req.headers);
     console.log(req.body);
     res.send('OK');
 
@@ -41,6 +39,7 @@ module.exports = function (app, tc, io) {
           console.log(err);
           return socket.emit('err', { message: 'Error fetching profile, please retry' });
         }
+        console.log(body);
         return socket.emit('profile', { data: JSON.parse(body) });
       });
     });
