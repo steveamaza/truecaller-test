@@ -36,10 +36,10 @@ module.exports = function (app, tc, io) {
       socket.emit('connected', { m: 'connected' });
       tc.get_profile(req.body.accessToken, (err, body) => {
         if (err) {
-          console.log(err);
+          console.log('Something went wrong ', err);
           return socket.emit('err', { message: 'Error fetching profile, please retry' });
         }
-        console.log(body);
+        console.log('we got a response ', body);
         return socket.emit('profile', { data: JSON.parse(body) });
       });
     });
