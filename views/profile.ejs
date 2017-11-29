@@ -26,7 +26,8 @@
             
             <hr>
             <p>
-                <span id='message'></span>
+                <strong>Name: </strong><span id='name'></span>
+                <strong>Email: </strong><span id='email'></span>
             </p>
         </div>
     </div>
@@ -44,9 +45,10 @@
     });
     socket.on('profile', function(data){
         console.log(typeof data);
-        document.getElementById('message').innerText = JSON.stringify(data);
+        document.getElementById('name').innerText = JSON.stringify(data.name.first + ' ' + data.name.second);
+        document.getElementById('email').innerText = JSON.stringify(data.email);
         socket.disconnect();
-    })
+    });
 </script>
 
 </html>
