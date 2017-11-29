@@ -42,6 +42,7 @@
         console.log("error: ", data);
     });
     socket.on('profile', function(data){
+        console.log(data)
         var _data = JSON.stringify(data)
         console.log(typeof data);
         document.getElementById('name').innerText =_data.name
