@@ -5,9 +5,10 @@
 const express = require('express');
 
 const app = express();
-const server = require('http').createServer(app);
-
 const port = process.env.PORT || 8080;
+
+const server = app.listen(port);
+
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
@@ -52,5 +53,5 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, tc, io); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port);
+
 console.log(`The magic happens on port ${port}`);
