@@ -45,7 +45,7 @@
         var _data = data.data
         console.log('result', data)
         console.log('name', data.data.name)
-        document.getElementById('name').innerText = _data.name.first_name
+        document.getElementById('name').innerText = _data.name.first + ' ' + _data.name.first
         document.getElementById('email').innerText = _data.onlineIdentities.email
         socket.disconnect();
     });
