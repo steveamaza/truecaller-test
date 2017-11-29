@@ -23,6 +23,11 @@ const configDB = require('./config/database.js');
 const path = require('path');
 
 const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  socket.emit('connected', { m: 'connected' });
+  console.log('Connected');
+});
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
