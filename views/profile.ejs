@@ -25,10 +25,8 @@
             <h1 class="heading text-center">User Profile</h1>
             
             <hr>
-            <p>
-                <strong>Name: </strong><span id='name'></span>
-                <strong>Email: </strong><span id='email'></span>
-            </p>
+            <p><strong>Name: </strong><span id='name'></span></p>
+            <p><strong>Email: </strong><span id='email'></span></p>
         </div>
     </div>
 </body>
@@ -45,7 +43,7 @@
     });
     socket.on('profile', function(data){
         console.log(typeof data);
-        document.getElementById('name').innerText = JSON.stringify(data.name.first + ' ' + data.name.second);
+        document.getElementById('name').innerText = JSON.stringify(data.name);
         document.getElementById('email').innerText = JSON.stringify(data.email);
         socket.disconnect();
     });
