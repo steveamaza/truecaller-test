@@ -31,4 +31,15 @@
     </div>
 </body>
 
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io('https://still-basin-33822.herokuapp.com/');
+    socket.on('error', function (data) {
+        console.log("error: ", data);
+    });
+    socket.on('profile', function(data){
+        console.log("profile: ", data);
+    })
+</script>
+
 </html>

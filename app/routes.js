@@ -1,4 +1,4 @@
-module.exports = function (app, tc) {
+module.exports = function (app, tc, io) {
   // HOME PAGE ========
   app.get('/', (req, res) => {
     res.render('index.ejs', { message: '' }); // load the index.ejs file
@@ -33,6 +33,16 @@ module.exports = function (app, tc) {
     console.log(req.headers);
     console.log(req.body);
     res.send('OK');
+
+    io.on('connection', (socket) => {
+      tc.get_profile(req.body.token, (err, body) => {
+        if (err) {
+          console.log(err);
+          return socket.emit('error', { message: 'Error fetching profile, please retry' });
+        }
+        return socket.emit('profile', { data: JSON.parse(body) });
+      });
+    });
   });
 
   // LOGOUT ==============================
