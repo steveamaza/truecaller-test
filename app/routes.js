@@ -3,16 +3,18 @@ module.exports = function (app, tc) {
   // HOME PAGE ========
   // =====================================
   app.get('/', (req, res) => {
-    res.render('index.ejs'); // load the index.ejs file
+    res.render('index.ejs', {message: 'IK'}); // load the index.ejs file
   });
 
   // process the login form
   app.post('/login', (req, res) => {
     tc.call_truecaller(req.body.phone, (err, body) => {
-      if(err)
-        return console.log('err: ', err);
-      console.log('body ', body);
-      res.send("ok");
+      if (err) return console.log('err: ', err);
+      const validRequest = JSON.parse(body);
+      if (!validRequest.requestId) {
+        console.log('body ', body);
+        res.render('home', {message: validRequest.message});
+      }
     });
   });
 
