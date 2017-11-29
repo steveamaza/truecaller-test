@@ -40,18 +40,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// process the login form
-/*
-app.post(
-  '/login',
-  passport.authenticate('local-login', {
-    successRedirect: '/profile', // redirect to the secure profile section
-    failureRedirect: '/login', // redirect back to the signup page if there is an error
-    failureFlash: true, // allow flash messages
-  })
-);
-*/
-
 // routes ======================================================================
 require('./app/routes.js')(app, tc); // load our routes and pass in our app and fully configured passport
 
