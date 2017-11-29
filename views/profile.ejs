@@ -43,9 +43,8 @@
     });
     socket.on('profile', function(data){
         console.log(data)
-        var _data = JSON.stringify(data)
-        console.log(typeof data);
-        document.getElementById('name').innerText =_data.name
+        var _data = JSON.parse(JSON.stringify(data))
+        document.getElementById('name').innerText =data.name
         document.getElementById('email').innerText = _data.onlineIdentities.email
         socket.disconnect();
     });
