@@ -5,6 +5,8 @@
 const express = require('express');
 
 const app = express();
+const server = require('http').createServer(app);
+
 const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -20,7 +22,7 @@ const configDB = require('./config/database.js');
 
 const path = require('path');
 
-const io = require('socket.io')(app);
+const io = require('socket.io')(server);
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
