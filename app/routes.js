@@ -33,7 +33,7 @@ module.exports = function (app, tc, io) {
     res.send('OK');
 
     io.on('connection', (socket) => {
-      socket.emit('connected', { m: 'connected' });
+      socket.emit('connected', { message: 'connected' });
       tc.get_profile(req.body.accessToken, (err, body) => {
         if (err) {
           console.log('Something went wrong ', err);
