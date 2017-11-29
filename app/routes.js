@@ -1,3 +1,13 @@
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  // if they aren't redirect them to the home page
+  return res.redirect('/');
+}
+
 module.exports = function (app, tc, server) {
   // HOME PAGE ========
   app.get('/', (req, res) => {
@@ -23,7 +33,7 @@ module.exports = function (app, tc, server) {
   // PROFILE SECTION =====================
   app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.ejs', {
-      user: req.user, // get the user out of session and pass to template
+      data: {},
     });
   });
 
@@ -33,7 +43,7 @@ module.exports = function (app, tc, server) {
     res.send('OK');
 
     const io = require('socket.io')(server);
-    
+
     io.on('connection', (socket) => {
       socket.emit('connected', { message: 'connected' });
       tc.get_profile(req.body.accessToken, (err, body) => {
@@ -46,20 +56,4 @@ module.exports = function (app, tc, server) {
       });
     });
   });
-
-  // LOGOUT ==============================
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
 };
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-  // if user is authenticated in the session, carry on
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  // if they aren't redirect them to the home page
-  return res.redirect('/');
-}

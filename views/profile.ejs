@@ -25,9 +25,10 @@
             <h1 class="heading text-center">User Profile</h1>
             
             <hr>
-
+            <p>
+                <span id='message'></span>
+            </p>
         </div>
-
     </div>
 </body>
 
@@ -42,7 +43,9 @@
         console.log("error: ", data);
     });
     socket.on('profile', function(data){
-        console.log("profile: ", data);
+        console.log(typeof data);
+        document.getElementById('message').innerText = JSON.stringify(data);
+        socket.disconnect();
     })
 </script>
 
