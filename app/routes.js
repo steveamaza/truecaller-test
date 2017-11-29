@@ -1,37 +1,41 @@
 module.exports = function (app, tc) {
-  // =====================================
   // HOME PAGE ========
-  // =====================================
   app.get('/', (req, res) => {
-    res.render('index.ejs', {message: 'IK'}); // load the index.ejs file
+    res.render('index.ejs', { message: '' }); // load the index.ejs file
   });
 
-  // process the login form
+  // LOGIN SECTION =======================
   app.post('/login', (req, res) => {
+    console.log(req.body);
     tc.call_truecaller(req.body.phone, (err, body) => {
       if (err) return console.log('err: ', err);
       const validRequest = JSON.parse(body);
       if (!validRequest.requestId) {
         console.log('body ', body);
-        res.render('home', {message: validRequest.message});
+        return res.render('index.ejs', {
+          message:
+            'Phone number is in the wrong format. Please use country code (without the +, then the rest of your number',
+        });
       }
+      return res.render('profile.ejs');
     });
   });
 
-  // =====================================
   // PROFILE SECTION =====================
-  // =====================================
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
   app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile.ejs', {
       user: req.user, // get the user out of session and pass to template
     });
   });
 
-  // =====================================
+  //
+  app.post('/auth/truecaller/callback', (req, res) => {
+    console.log(req.headers);
+    console.log(req.body);
+    res.send('OK');
+  });
+
   // LOGOUT ==============================
-  // =====================================
   app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
