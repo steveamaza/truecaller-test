@@ -23,7 +23,6 @@ const configDB = require('./config/database.js');
 
 const path = require('path');
 
-const io = require('socket.io')(server);
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -46,7 +45,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./app/routes.js')(app, tc, io); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, tc, server); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 

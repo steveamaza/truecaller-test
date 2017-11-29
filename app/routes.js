@@ -1,4 +1,4 @@
-module.exports = function (app, tc, io) {
+module.exports = function (app, tc, server) {
   // HOME PAGE ========
   app.get('/', (req, res) => {
     res.render('index.ejs', { message: '' }); // load the index.ejs file
@@ -32,6 +32,8 @@ module.exports = function (app, tc, io) {
     console.log(req.body);
     res.send('OK');
 
+    const io = require('socket.io')(server);
+    
     io.on('connection', (socket) => {
       socket.emit('connected', { message: 'connected' });
       tc.get_profile(req.body.accessToken, (err, body) => {
