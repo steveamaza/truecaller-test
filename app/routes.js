@@ -34,7 +34,7 @@ module.exports = function (app, tc, io) {
 
     io.on('connection', (socket) => {
       socket.emit('connected', { m: 'connected' });
-      tc.get_profile(req.body.token, (err, body) => {
+      tc.get_profile(req.body.accessToken, (err, body) => {
         if (err) {
           console.log(err);
           return socket.emit('err', { message: 'Error fetching profile, please retry' });
