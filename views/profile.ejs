@@ -43,8 +43,8 @@
     });
     socket.on('profile', function(data){
         console.log(typeof data);
-        document.getElementById('name').innerText = JSON.stringify(data);
-        document.getElementById('email').innerText = JSON.stringify(data.email);
+        document.getElementById('name').innerText = JSON.parse(data);
+        document.getElementById('email').innerText = JSON.parse(data.email);
         socket.disconnect();
     });
 </script>
