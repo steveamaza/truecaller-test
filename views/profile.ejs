@@ -42,9 +42,10 @@
         console.log("error: ", data);
     });
     socket.on('profile', function(data){
+        var _data = JSON.stringify(data)
         console.log(typeof data);
-        document.getElementById('name').innerText = JSON.stringify(data);
-        document.getElementById('email').innerText = JSON.stringify(data.email);
+        document.getElementById('name').innerText =_data.name
+        document.getElementById('email').innerText = _data.onlineIdentities.email
         socket.disconnect();
     });
 </script>
