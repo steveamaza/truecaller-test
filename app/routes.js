@@ -43,17 +43,17 @@ module.exports = function (app, tc, server) {
     res.send('OK');
 
     const io = require('socket.io')(server);
+    tc.get_profile(req.body.accessToken, (err, body) => {
+      if (err) {
+        return console.log('Something went wrong ', err);
+      }        
+      console.log('we got a response ', body);
 
-    io.on('connection', (socket) => {
-      socket.emit('connected', { message: 'connected' });
-      tc.get_profile(req.body.accessToken, (err, body) => {
-        if (err) {
-          console.log('Something went wrong ', err);
-          return socket.emit('err', { message: 'Error fetching profile, please retry' });
-        }
-        console.log('we got a response ', body);
-        return socket.emit('profile', { data: JSON.parse(body) });
+      io.on('connection', (socket) => {
+        socket.emit('profile', { data: JSON.parse(body) });
       });
     });
+    
   });
+
 };
