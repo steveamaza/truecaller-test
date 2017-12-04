@@ -8,6 +8,12 @@ function isLoggedIn(req, res, next) {
   return res.redirect('/');
 }
 
+const sendProfile = (connected, body) => {
+  if (connected && connected.connected) {
+    return connected.emit('profile', { data: JSON.parse(body) });
+  }
+};
+
 module.exports = function (app, tc, server) {
   // HOME PAGE ========
   app.get('/', (req, res) => {
@@ -48,9 +54,8 @@ module.exports = function (app, tc, server) {
       }
       console.log('we got a response ', body);
       const io = require('socket.io')(server);
-      io.on('connection', (socket) => {
-        socket.emit('profile', { data: JSON.parse(body) });
-      });
+      const connected = io.on('connection', (socket) => { socket.emit('message', 'something light')});
+      return sendProfile(connected, body);
     });
   });
 };
