@@ -25,7 +25,7 @@ module.exports = {
       { phoneNumber },
       'POST',
       headers,
-      'https://api4.truecaller.com/v1/apps/requests',
+      'https://api4.truecaller.com/v1/apps/requests'
     );
     request(options, (error, response, body) => {
       if (error) return callback(error, null);
