@@ -35,7 +35,7 @@
 <script>
     var socket = io('https://still-basin-33822.herokuapp.com/');
 
-    socket.on('connected', (data)=>{
+    socket.on('message', (data)=>{
         console.log("connected: ", data);
     });
     socket.on('err', function (data) {

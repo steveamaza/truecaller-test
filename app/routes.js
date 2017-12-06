@@ -9,12 +9,14 @@ function isLoggedIn(req, res, next) {
 }
 
 const sendProfile = (connected, body) => {
+  console.log(connected.emit);
   if (connected && connected.connected) {
-    return connected.emit('profile', { data: JSON.parse(body) });
+    console.log('We got to send Profile');
+    connected.emit('profile', body);
   }
 };
 
-module.exports = function (app, tc, server) {
+module.exports = function (app, tc, connected) {
   // HOME PAGE ========
   app.get('/', (req, res) => {
     res.render('index.ejs', { message: '' }); // load the index.ejs file
@@ -48,14 +50,6 @@ module.exports = function (app, tc, server) {
     console.log(req.body);
     res.send('OK');
 
-    tc.get_profile(req.body.accessToken, (err, body) => {
-      if (err) {
-        return console.log('Something went wrong ', err);
-      }
-      console.log('we got a response ', body);
-      const io = require('socket.io')(server);
-      const connected = io.on('connection', (socket) => { socket.emit('message', 'something light')});
-      return sendProfile(connected, body);
-    });
+    return sendProfile(connected, req.body);
   });
 };
