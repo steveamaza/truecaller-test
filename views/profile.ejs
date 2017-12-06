@@ -31,24 +31,4 @@
     </div>
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-<script>
-    var socket = io('https://still-basin-33822.herokuapp.com/');
-
-    socket.on('message', (data)=>{
-        console.log("connected: ", data);
-    });
-    socket.on('err', function (data) {
-        console.log("error: ", data);
-    });
-    socket.on('profile', function(data){
-        var _data = data.data
-        console.log('result', data)
-        console.log('name', data.data.name)
-        document.getElementById('name').innerText = _data.name.first + ' ' + _data.name.last
-        document.getElementById('email').innerText = _data.onlineIdentities.email
-        // socket.disconnect();
-    });
-</script>
-
 </html>
