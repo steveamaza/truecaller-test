@@ -17,7 +17,7 @@ module.exports = (app, tc) => {
             'Phone number is in the wrong format. Please use country code (without the +, then the rest of your number',
         });
       }
-      return res.render('profile.ejs', { requestId: validRequest.requestId, profile: '' });
+      return res.render('profile.ejs', { requestId: validRequest.requestId, profile: 'yes' });
     });
   });
 
