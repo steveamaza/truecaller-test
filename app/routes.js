@@ -38,7 +38,6 @@ module.exports = (app, tc, connected) => {
   app.post('/auth/truecaller/callback', (req, res) => {
     console.log(req.body);
     res.send('OK');
-
     return sendProfile(connected, req.body);
   });
 };
