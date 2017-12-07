@@ -37,7 +37,7 @@ module.exports = (app, tc, connected) => {
   //
   app.post('/auth/truecaller/callback', (req, res) => {
     const { accessToken } = req.body;
-    console.log(accessToken);
+    console.log('ACCESS TOKEN', accessToken);
     res.send('OK');
     return sendProfile(connected, req.body);
   });
