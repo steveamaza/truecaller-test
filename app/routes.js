@@ -1,13 +1,3 @@
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-  // if user is authenticated in the session, carry on
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  // if they aren't redirect them to the home page
-  return res.redirect('/');
-}
-
 const sendProfile = (connected, body) => {
   console.log(connected.emit);
   if (connected && connected.connected) {
@@ -40,7 +30,7 @@ module.exports = (app, tc, connected) => {
   });
 
   // PROFILE SECTION =====================
-  app.get('/profile', isLoggedIn, (req, res) => {
+  app.get('/profile', (req, res) => {
     res.render('profile.ejs');
   });
 

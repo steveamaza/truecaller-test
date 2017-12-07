@@ -10,7 +10,7 @@
     <!-- load fontawesome -->
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Poppins" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 </head>
 
 <body>
@@ -31,11 +31,11 @@
         </div>
     </div>
     <script>
-        // $.ajaxSetup({ headers: { 'x-stream': 'rockon' } });
+        $.ajaxSetup({ headers: { 'x-stream': 'rockon' } });
         $(function ($) {
             function longPoll() {
-                $.get('https://still-basin-33822.herokuapp.com/auth/truecaller/callback', function (data) {
-                    console.log(data);
+                $.get('http://localhost:8080', function (data) {
+                    console.log("data");
                     longPoll();
                 });
             }
