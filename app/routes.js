@@ -32,7 +32,7 @@ module.exports = (app, tc) => {
     console.log('ACCESS TOKEN', accessToken);
     tc.get_profile(accessToken, (err, body) => {
       if (err) return console.log('err: ', err);
-      const profileData = JSON.parse(body);
+      const profileData = body; //JSON.parse(body);
       console.log(profileData);
       return res.send({ profile: profileData });
     });
