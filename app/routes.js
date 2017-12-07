@@ -34,7 +34,7 @@ module.exports = (app, tc) => {
       if (err) return console.log('err: ', err);
       const profileData = JSON.parse(body);
       console.log(profileData);
-      return res.render('profile', { profile: profileData });
+      return res.render('profile.ejs', { profile: profileData });
     });
   });
 };
