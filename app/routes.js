@@ -1,12 +1,4 @@
-const sendProfile = (connected, body) => {
-  console.log(connected.emit);
-  if (connected && connected.connected) {
-    console.log('We got to send Profile');
-    connected.emit('profile', body);
-  }
-};
-
-module.exports = (app, tc, connected) => {
+module.exports = (app, tc) => {
   // HOME PAGE ========
   app.get('/', (req, res) => {
     res.render('index.ejs', { message: '' }); // load the index.ejs file
@@ -38,7 +30,11 @@ module.exports = (app, tc, connected) => {
   app.post('/auth/truecaller/callback', (req, res) => {
     const { accessToken } = req.body;
     console.log('ACCESS TOKEN', accessToken);
-    res.send('OK');
-    return sendProfile(connected, req.body);
+    tc.get_profile(accessToken, (err, body) => {
+      if (err) return console.log('err: ', err);
+      const profileData = JSON.parse(body);
+      console.log(profileData);
+      return res.send({ profile: profileData });
+    });
   });
 };
