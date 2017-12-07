@@ -35,7 +35,7 @@
         $(function ($) {
             function longPoll() {
                 $.get('https://still-basin-33822.herokuapp.com/', function (data) {
-                    console.log("data");
+                    console.log(data);
                     longPoll();
                 });
             }
