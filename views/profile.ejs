@@ -35,7 +35,8 @@
         $(function ($) {
             function longPoll() {
                 $.get('https://still-basin-33822.herokuapp.com/auth/truecaller/callback', function (response) {
-                    console.log(response);
+                    var result = response
+                    console.log(result);
                     longPoll();
                 });
             }
