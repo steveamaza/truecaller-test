@@ -16,7 +16,7 @@ const sendProfile = (connected, body) => {
   }
 };
 
-module.exports = function (app, tc, connected) {
+module.exports = (app, tc, connected) => {
   // HOME PAGE ========
   app.get('/', (req, res) => {
     res.render('index.ejs', { message: '' }); // load the index.ejs file
@@ -27,6 +27,7 @@ module.exports = function (app, tc, connected) {
     tc.call_truecaller(req.body.phone, (err, body) => {
       if (err) return console.log('err: ', err);
       const validRequest = JSON.parse(body);
+      console.log(validRequest);
       if (!validRequest.requestId) {
         console.log('body ', body);
         return res.render('index.ejs', {
@@ -34,15 +35,13 @@ module.exports = function (app, tc, connected) {
             'Phone number is in the wrong format. Please use country code (without the +, then the rest of your number',
         });
       }
-      return res.render('profile.ejs');
+      return res.render('profile.ejs', { requestId: validRequest.requestId });
     });
   });
 
   // PROFILE SECTION =====================
   app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile.ejs', {
-      data: {},
-    });
+    res.render('profile.ejs');
   });
 
   //
