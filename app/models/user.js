@@ -6,7 +6,7 @@ const { Schema } = mongoose.Schema;
 // define the schema for our user model
 const userSchema = Schema({
   requestId: { type: String, required: true },
-  userId: { type: Number, required: false },
+  userId: { type: Number, required: true },
   phoneNumbers: { type: Array },
   name: { type: Object },
   onlineId: { type: Object },

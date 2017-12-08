@@ -38,10 +38,6 @@ app.use(bodyParser()); // get information from html forms
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(flash()); // use connect-flash for flash messages stored in session
-
 // routes ======================================================================
 require('./app/routes.js')(app, tc, server); // load our routes and pass in our app and fully configured passport
 

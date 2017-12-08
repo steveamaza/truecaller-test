@@ -1,3 +1,5 @@
+const User = require('./models/user');
+
 module.exports = (app, tc) => {
   // HOME PAGE ========
   app.get('/', (req, res) => {
@@ -35,7 +37,22 @@ module.exports = (app, tc) => {
       if (err) return console.log('err: ', err);
       const profileData = JSON.parse(body);
 
+      const newUser = new User({
+        name: profileData.name,
+        phone: profileData.phoneNumbers,
+        profile: profileData.onlineId,
+      });
+      newUser.save((error) => {
+        // will this callback always be called correctly?
+        if (error) {
+          res.send('ERROR!');
+        } else {
+          res.send('SUCCESS!');
+        }
+      });
+
       console.log(body);
+      res.send('Profile Saved');
     });
   });
 
@@ -44,4 +61,3 @@ module.exports = (app, tc) => {
 
   // });
 };
-
