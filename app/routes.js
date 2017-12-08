@@ -28,13 +28,20 @@ module.exports = (app, tc) => {
 
   //
   app.post('/auth/truecaller/callback', (req, res) => {
+    res.send('ok');
     const { accessToken } = req.body;
     console.log('ACCESS TOKEN', accessToken);
     tc.get_profile(accessToken, (err, body) => {
       if (err) return console.log('err: ', err);
       const profileData = JSON.parse(body);
+
       console.log(profileData);
-      return res.render('profile.ejs', { profile: profileData });
     });
   });
+
+  // app.get('/profiledata/:phone', (req, res) => {
+  //   let phone = req.params.phone;
+
+  // });
 };
+

@@ -24,13 +24,10 @@ const path = require('path');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-// Get the default connection
-const db = mongoose.connection;
+mongoose.Promise = global.Promise; // Get Mongoose to use the global promise library
+const db = mongoose.connection; // Get default connection
 
-// Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); // Bind connection to error event (to get notification of connection errors)
 
 app.use(express.static(path.join(__dirname, ''))); // for defining static file path
 
