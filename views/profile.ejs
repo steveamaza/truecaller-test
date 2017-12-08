@@ -34,7 +34,7 @@
         $.ajaxSetup({ headers: { 'x-stream': 'rockon' } });
         $(function ($) {
             function longPoll() {
-                $.get('https://still-basin-33822.herokuapp.com/auth/truecaller/callback', function (response) {
+                $.get('https://still-basin-33822.herokuapp.com/', function (response) {
                     var result = response
                     console.log('NEW RESULT', result);
                     longPoll();
