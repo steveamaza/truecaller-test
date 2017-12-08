@@ -10,7 +10,6 @@ const port = process.env.PORT || 8080;
 const server = app.listen(port);
 
 const mongoose = require('mongoose');
-const passport = require('passport');
 const flash = require('connect-flash');
 const tc = require('./config/truecaller');
 
@@ -23,11 +22,15 @@ const configDB = require('./config/database.js');
 
 const path = require('path');
 
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+// Get the default connection
+const db = mongoose.connection;
 
-require('./config/passport')(passport); // pass passport for configuration
+// Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.static(path.join(__dirname, ''))); // for defining static file path
 
@@ -40,8 +43,6 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
